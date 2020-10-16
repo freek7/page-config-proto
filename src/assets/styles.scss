@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import 'form-controls';
+@import 'buttons';
+@import 'utils';
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+}
+
+.upc-button {
+    max-width: 360px;
+}
