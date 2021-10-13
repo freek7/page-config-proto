@@ -99,7 +99,7 @@ import { renderFile } from "@/utils/index";
 
 // data, options
 import fonts from "@/utils/data/fonts.json";
-import langsOtions from '@/utils/data/langs-options.json'
+import langsOtions from "@/utils/data/langs-options.json";
 
 export default {
   name: "UpcPanelBar",

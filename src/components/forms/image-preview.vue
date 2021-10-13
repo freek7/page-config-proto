@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import CloseIcon from "@/components/icons/close-icon";
+import CloseIcon from "@/components/icons/close-icon.vue";
 
 export default {
   name: "ImagePreview",

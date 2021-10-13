@@ -3,16 +3,40 @@
     <div class="upc-content-preview ">
       <upc-panel-bar class="upc-mb-3" v-model="form"/>
     <div class="page-preview  upc-mb-3">
-       <upc-payment-page :config="form"/>
+       <upc-payment-page
+           description="Товар"
+           merchant-name="Продавець Comfy"
+           order-id-text="Номер test"
+           price-text="200 hrn"
+           :config="form"/>
     </div>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+
+const i18n = Vue.observable({
+  $t: {
+    orderID: "Заказ №",
+    cardNumber: "Номер карты",
+    cardExp: "Срок действия",
+    cardCVC: "Код CVC2 (CVV2) числится на оборотной стороне карты",
+    pay: "Оплатить",
+    login: "Логин",
+    password: "Пароль",
+    enter: "Ввойти"
+  }
+});
 
 export default {
   name: 'App',
+  provide () {
+    return {
+      i18n: i18n
+    }
+  },
   data(){
     return {
       form: {
@@ -24,7 +48,7 @@ export default {
         "email": "test@mail.com",
         "language": "ru",
         "logo": "https://cdn.comfy.ua/skin/frontend/enterprise/comfy_3/modules/common/img/logo_main.svg"
-      }     
+      }
     }
   }
 }

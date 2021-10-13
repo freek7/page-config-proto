@@ -1,0 +1,22 @@
+.upc-credit-card {
+    width: 360px;
+    height: 234px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 20px 0 rgba(0, 0, 0, 0.16);
+    border: solid 1px #dae3eb;
+    background-color: #edf2f6;
+    max-width: 100%;
+    padding: 25px;
+    font-size: 14px;
+
+    .label-info {
+        font-size: 14px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #212225;
+        padding-bottom: 8px;
+    }
+}
