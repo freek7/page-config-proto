@@ -7,9 +7,9 @@
       <div
         class="slide"
         v-for="(slide, index) in slides"
-        :class="{ active: index === value }"
-        @click="update(index)"
-        :key="index"
+        :class="{ active: slide.name === value }"
+        @click="update(slide.name)"
+        :key="slide.name"
       >
         <div class="slide-icon">
           <component :is="slide.icon"></component>

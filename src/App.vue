@@ -8,7 +8,10 @@
             merchant-name="Продавець Comfy"
             order-id-text="Номер test"
             price-text="200 hrn"
-            masterPass creditCard googlePay applePay
+            masterPass
+            creditCard
+            googlePay
+            applePay
             :config="form">
         </upc-payment-page>
       </div>

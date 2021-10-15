@@ -17,7 +17,7 @@
 
         <div>
           <div class="slider">
-            <upc-slider v-model="slideIndex" :slides="allowedSlides"/>
+            <upc-slider v-model="currenSlideName" :slides="allowedSlides"/>
           </div>
           <div v-if="allowedSlides.length" class="upc-mt-5">
             <div class="content-center">
@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       errors: {},
-      slideIndex: 0,
+      currenSlideName: null,
     };
   },
 
@@ -117,7 +117,7 @@ export default {
       return [
         {
           icon: "card-icon",
-          title: "Банковская карта",
+          title: "Credit card",
           name: "creditCard"
         },
         {
@@ -137,12 +137,16 @@ export default {
         },
       ]
     },
-    currenSlideName(){
-      return this.slides[this.slideIndex] ? this.slides[this.slideIndex].name : ''
-    },
+    // currenSlideName(){
+    //   return this.slides[this.slideIndex] ? this.slides[this.slideIndex].name : ''
+    // },
     allowedSlides(){
       return this.slides.filter(item => this[item.name])
     }
+  },
+
+  created() {
+    this.currenSlideName = this.allowedSlides[0] ? this.allowedSlides[0].name : '';
   },
 
   methods: {
