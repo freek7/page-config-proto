@@ -1,6 +1,6 @@
 {
   "name": "upc-payment-component",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,6 +10,12 @@
     "build:components": "vue-cli-service build --target lib --name upcPaymentPage  src/build/index.js",
     "build:wc": "node ./build-scripts/build-wc.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freek7/page-config-proto"
+  },
+  "private": false,
+  "author": "https://github.com/freek7",
   "version": "0.0.1",
   "main": "dist/upcPaymentPage.umd.js",
   "module": "dist/upcPaymentPage.common.js",
