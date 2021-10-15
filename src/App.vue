@@ -2,14 +2,16 @@
   <div id="app">
     <div class="upc-content-preview ">
       <upc-panel-bar class="upc-mb-3" v-model="form"/>
-    <div class="page-preview  upc-mb-3">
-       <upc-payment-page
-           description="Товар"
-           merchant-name="Продавець Comfy"
-           order-id-text="Номер test"
-           price-text="200 hrn"
-           :config="form"/>
-    </div>
+      <div class="page-preview  upc-mb-3">
+        <upc-payment-page
+            description="Товар"
+            merchant-name="Продавець Comfy"
+            order-id-text="Номер test"
+            price-text="200 hrn"
+            masterPass creditCard googlePay applePay
+            :config="form">
+        </upc-payment-page>
+      </div>
     </div>
   </div>
 </template>
@@ -33,13 +35,13 @@ const i18n = Vue.observable({
 
 export default {
   name: 'App',
-  provide () {
+  provide() {
     return {
       i18n: i18n
     }
   },
   components: {UpcPanelBar},
-  data(){
+  data() {
     return {
       form: {
         "header_color": "#43B02A",
@@ -57,22 +59,23 @@ export default {
 </script>
 <style lang="scss">
 
-  .upc-content-preview{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 30px;
-    @media(max-width:600px){
-      padding: 5px;
-    }
+.upc-content-preview {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+  @media(max-width: 600px) {
+    padding: 5px;
   }
-  .page-preview{
-    max-width: 100%;
-    width: 658px;
-    height: 782px;
-    border-radius: 4px;
-    box-shadow: 2px 2px 12px 0 rgba(0, 0, 0, 0.09);
-    border: solid 1px #eaeaea;
-    background-color: #ffffff;
-    margin: 0 auto;
-  }
+}
+
+.page-preview {
+  max-width: 100%;
+  width: 658px;
+  height: 782px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 12px 0 rgba(0, 0, 0, 0.09);
+  border: solid 1px #eaeaea;
+  background-color: #ffffff;
+  margin: 0 auto;
+}
 </style>

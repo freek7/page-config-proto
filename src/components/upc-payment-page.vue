@@ -17,32 +17,34 @@
 
         <div>
           <div class="slider">
-            <upc-slider v-model="slideIndex" :slides="slides"/>
+            <upc-slider v-model="slideIndex" :slides="allowedSlides"/>
           </div>
-          <div class="upc-mt-5">
-            <template v-if="currenSlideName === 'creditCard'">
+          <div v-if="allowedSlides.length" class="upc-mt-5">
+            <div class="content-center">
+            <slot name="creditCard" v-if="currenSlideName === 'creditCard'">
               <upc-card-payment
                   :priceText="priceText"
                   :config="config"
                   @submit-payment:credit-card="onSubmit"
               />
-            </template>
-            <template v-if="currenSlideName === 'masterPass'">
+            </slot>
+            <slot name="masterPass" v-if="currenSlideName === 'masterPass'">
               <upc-massterpass-payment
                   :config="config"
                   @submit-payment:master-pass="onSubmit"
               />
-            </template>
-            <template v-if="currenSlideName === 'googlePay'">
+            </slot>
+            <slot name="googlePay" v-if="currenSlideName === 'googlePay'">
               <div class="content-center">
                 <h3>to do googlePay</h3>
               </div>
-            </template>
-            <template v-if="currenSlideName === 'applePay'">
+            </slot>
+            <slot name="applePay" v-if="currenSlideName === 'applePay'">
               <div class="content-center">
                 <h3>to do applePay</h3>
               </div>
-            </template>
+            </slot>
+            </div>
           </div>
         </div>
       </div>
@@ -63,6 +65,15 @@ import {updateFont} from '@/utils/dom-manipulation/update-font.js'
 // mixins
 import {PageConfigMixin} from "@/mixins/page-config.mixin.js"
 
+const paymentInstruments = () => {
+  return ['masterPass', 'creditCard', 'googlePay', 'applePay'].reduce((prev, cur) => {
+      prev[cur] = {
+        type: Boolean,
+        default: false
+      }
+      return prev
+  }, {})
+}
 
 export default {
   name: "UpcPaymentPage",
@@ -91,7 +102,8 @@ export default {
     priceText: {
       type: String,
       default: ""
-    }
+    },
+    ...paymentInstruments()
   },
   data() {
     return {
@@ -129,7 +141,7 @@ export default {
       return this.slides[this.slideIndex] ? this.slides[this.slideIndex].name : ''
     },
     allowedSlides(){
-      return this.slides
+      return this.slides.filter(item => this[item.name])
     }
   },
 
