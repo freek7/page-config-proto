@@ -1,5 +1,5 @@
 <template>
-  <div class="upc-slider">
+  <div v-if="slides && slides.length" class="upc-slider">
     <div class="slider-button" @click="update(value - 1)">
       <div class="button-icon"></div>
     </div>
@@ -34,6 +34,10 @@ export default {
   name: "UpcSlider",
   props: {
     value: {},
+    slides: {
+      type: Array,
+      default: () => []
+    }
   },
   components: {
     "masterpass-icon": SliderMasterpassIcon,
@@ -42,28 +46,7 @@ export default {
     "apple-pay-icon": SliderAppleIcon,
   },
 
-  data() {
-    return {
-      slides: [
-        {
-          icon: "card-icon",
-          title: "Банковская карта",
-        },
-        {
-          icon: "apple-pay-icon",
-          title: "Apple Pay",
-        },
-        {
-          icon: "google-pay-icon",
-          title: "Google Pay",
-        },
-        {
-          icon: "masterpass-icon",
-          title: "Masterpass",
-        },
-      ],
-    };
-  },
+
   methods: {
     update(index) {
       let newIndex = index;

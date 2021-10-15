@@ -16,6 +16,7 @@
 
 <script>
 import Vue from "vue";
+import UpcPanelBar from './components/upc-panel-bar'
 
 const i18n = Vue.observable({
   $t: {
@@ -37,6 +38,7 @@ export default {
       i18n: i18n
     }
   },
+  components: {UpcPanelBar},
   data(){
     return {
       form: {

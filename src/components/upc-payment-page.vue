@@ -6,10 +6,10 @@
           <slot name="orderInfo">
             <!-- #region demo content -->
             <div class="order-info-demo">
-              <h3 class="order-info-demo__merchant-name">{{merchantName}}</h3>
-              <small>{{ i18n.$t.orderID }} {{orderIdText}}</small>
-              <p>{{description}}</p>
-              <h3 class="order-info-demo__price">{{priceText}}</h3>
+              <h3 class="order-info-demo__merchant-name">{{ merchantName }}</h3>
+              <small>{{ i18n.$t.orderID }} {{ orderIdText }}</small>
+              <p>{{ description }}</p>
+              <h3 class="order-info-demo__price">{{ priceText }}</h3>
             </div>
             <!-- #endregion -->
           </slot>
@@ -17,21 +17,27 @@
 
         <div>
           <div class="slider">
-            <upc-slider v-model="slideIndex" />
+            <upc-slider v-model="slideIndex" :slides="slides"/>
           </div>
           <div class="upc-mt-5">
-            <template v-if="slideIndex === 0">
-              <!-- #region card -->
-              <upc-card-payment :priceText="priceText" :config="config" />
-
-              <!-- #endregion -->
+            <template v-if="currenSlideName === 'creditCard'">
+              <upc-card-payment
+                  :priceText="priceText"
+                  :config="config"
+                  @submit-payment:credit-card="onSubmit"
+              />
             </template>
-            <template v-else-if="slideIndex === 3">
-              <upc-massterpass-payment  :config="config"/>
+            <template v-if="currenSlideName === 'masterPass'">
+              <upc-massterpass-payment @submit-payment:master-pass="onSubmit" :config="config"/>
             </template>
-            <template v-else>
+            <template v-if="currenSlideName === 'googlePay'">
               <div class="content-center">
-                <h3>to do</h3>
+                <h3>to do googlePay</h3>
+              </div>
+            </template>
+            <template v-if="currenSlideName === 'applePay'">
+              <div class="content-center">
+                <h3>to do applePay</h3>
               </div>
             </template>
           </div>
@@ -90,12 +96,49 @@ export default {
       slideIndex: 0,
     };
   },
+
+  computed: {
+    slides() {
+      return [
+        {
+          icon: "card-icon",
+          title: "Банковская карта",
+          name: "creditCard"
+        },
+        {
+          icon: "apple-pay-icon",
+          title: "Apple Pay",
+          name: "applePay"
+        },
+        {
+          icon: "google-pay-icon",
+          title: "Google Pay",
+          name: "googlePay"
+        },
+        {
+          icon: "masterpass-icon",
+          title: "Masterpass",
+          name: "masterPass"
+        },
+      ]
+    },
+    currenSlideName(){
+      return this.slides[this.slideIndex] ? this.slides[this.slideIndex].name : ''
+    },
+    allowedSlides(){
+      return this.slides
+    }
+  },
+
   methods: {
     setFont() {
       const font_name = this.config.font_name;
       const font = fonts.find((item) => item.name === font_name);
       updateFont(font_name, font.link);
     },
+    onSubmit($event) {
+      this.$emit('submit', $event);
+    }
   },
 
   watch: {
@@ -116,15 +159,18 @@ export default {
     text-align: center;
     padding-top: 25px;
     padding-bottom: 25px;
+
     &-demo {
       font-weight: normal;
       font-stretch: normal;
       font-style: normal;
       line-height: 1.7;
+
       &__price {
         font-size: 32px;
         line-height: 1.44;
       }
+
       &__merchant-name {
         font-size: 31px;
         font-weight: bold;

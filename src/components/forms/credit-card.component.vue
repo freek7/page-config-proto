@@ -11,7 +11,7 @@
             <component v-bind:is="cardTypeIcon"></component>
           </span>
           <input
-              name="CardNumber"
+              autocomplete="cc-number"
               v-model="cardInfo.cardNumber"
               @change="onCardNumberChange"
               v-mask="'#### #### #### ####'"
@@ -27,7 +27,7 @@
           <div class="card-date__mm">
             <label :class="{ invalid: inValid.cardMM }" class="form-control">
               <input
-                  name="ExpMonth"
+                  autocomplete="cc-exp-mm"
                   v-model="cardInfo.cardMM"
                   v-mask="'##'"
                   class="text-center"
@@ -44,7 +44,7 @@
                   class="text-center"
                   type="text"
                   maxlength="2"
-                  name="ExpYear"
+                  autocomplete="cc-exp-yy"
               />
             </label>
           </div>
@@ -54,7 +54,7 @@
         <div class="label-info upc-d-flex justify-content-between">
           <span>CVC2/CVV2 </span>
           <upc-tooltip>
-            {{i18n.$t.cardCVC}}
+            {{ i18n.$t.cardCVC }}
           </upc-tooltip>
         </div>
         <label :class="{ invalid: inValid.cardCvc2 }" class="form-control">
@@ -62,9 +62,8 @@
               v-model="cardInfo.cardCvc2"
               class="text-center"
               v-mask="'###'"
-              name="Cvc"
-              autocomplete="new-password"
-              type="text"
+              autocomplete="cc-csc"
+              type="password"
               maxlength="3"
           />
         </label>
@@ -153,6 +152,15 @@ export default {
       } else {
         this.cardTypeIcon = false
       }
+    },
+    getCardData() {
+      const {cardNumber, cardCvc2, cardYY, cardMM} = this.cardInfo;
+      return {
+        cardNumber: cardNumber.replace(/ /g, ''),
+        cardCvc2,
+        cardYY,
+        cardMM
+      }
     }
   },
   watch: {
@@ -180,27 +188,6 @@ export default {
 @import '../../assets/credit-card';
 @import '../../assets/form-controls';
 .upc-credit-card {
-  // width: 360px;
-  // height: 234px;
-  // border-radius: 10px;
-  // box-shadow: 6px 6px 20px 0 rgba(0, 0, 0, 0.16);
-  // border: solid 1px #dae3eb;
-  // background-color: #edf2f6;
-  // max-width: 100%;
-  // padding: 25px;
-  // font-size: 14px;
-
-  // .label-info {
-  //   font-size: 14px;
-  //   font-weight: 600;
-  //   font-stretch: normal;
-  //   font-style: normal;
-  //   line-height: normal;
-  //   letter-spacing: normal;
-  //   color: #212225;
-  //   padding-bottom: 8px;
-  // }
-
   .card-detalis {
     display: flex;
     padding-top: 35px;
