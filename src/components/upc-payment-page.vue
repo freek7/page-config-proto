@@ -28,7 +28,10 @@
               />
             </template>
             <template v-if="currenSlideName === 'masterPass'">
-              <upc-massterpass-payment @submit-payment:master-pass="onSubmit" :config="config"/>
+              <upc-massterpass-payment
+                  :config="config"
+                  @submit-payment:master-pass="onSubmit"
+              />
             </template>
             <template v-if="currenSlideName === 'googlePay'">
               <div class="content-center">
@@ -143,7 +146,7 @@ export default {
 
   watch: {
     "config.font_name": {
-      immediate: false,
+      immediate: true,
       handler() {
         this.setFont();
       },

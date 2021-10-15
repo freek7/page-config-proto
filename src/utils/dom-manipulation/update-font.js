@@ -10,7 +10,7 @@ export const updateFont = (fontName, fontLink, elmentId = 'upc-font') => {
 	}
 	const style = document.createElement('style');
 	style.setAttribute('type', 'text/css');
-	style.setAttribute('id', 'upc-font');
+	style.setAttribute('id', elmentId);
 	document.head.append(style);
 
 	const css = `
