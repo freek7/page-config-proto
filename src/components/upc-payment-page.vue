@@ -1,6 +1,6 @@
 <template>
-  <div class="UpcPaymentPage" :style="{ color: config.font_color }">
-    <upc-base-layout :config="config">
+  <div class="UpcPaymentPage" :style="{ color: config.font_color}">
+    <upc-base-layout :config="config" >
       <div>
         <div class="order-info">
           <slot name="orderInfo">
@@ -137,9 +137,6 @@ export default {
         },
       ]
     },
-    // currenSlideName(){
-    //   return this.slides[this.slideIndex] ? this.slides[this.slideIndex].name : ''
-    // },
     allowedSlides(){
       return this.slides.filter(item => this[item.name])
     }

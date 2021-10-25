@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper"  :style="{ background: config.background_color}">
     <div class="content">
       <div :style="{ background: config.header_color }" class="header">
         <img :src="config.logo" alt="" />

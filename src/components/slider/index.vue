@@ -1,14 +1,14 @@
 <template>
   <div v-if="slides && slides.length" class="upc-slider">
-    <div class="slider-button" @click="update(value - 1)">
+    <div class="slider-button" @click="update(index - 1)">
       <div class="button-icon"></div>
     </div>
     <div ref="slides" class="slides">
       <div
         class="slide"
-        v-for="(slide, index) in slides"
-        :class="{ active: slide.name === value }"
-        @click="update(slide.name)"
+        v-for="(slide, slideIndex) in slides"
+        :class="{ active: slideIndex === index }"
+        @click="update(slideIndex)"
         :key="slide.name"
       >
         <div class="slide-icon">
@@ -17,7 +17,7 @@
         <p>{{ slide.title }}</p>
       </div>
     </div>
-    <div class="slider-button" @click="update(value + 1)">
+    <div class="slider-button" @click="update(index + 1)">
       <div class="button-icon next"></div>
     </div>
   </div>
@@ -46,6 +46,11 @@ export default {
     "apple-pay-icon": SliderAppleIcon,
   },
 
+  data(){
+    return {
+      index: 0
+    }
+  },
 
   methods: {
     update(index) {
@@ -56,8 +61,15 @@ export default {
       if (this.slides.length - 1 < newIndex) {
         newIndex = 0;
       }
-      this.$emit("input", newIndex);
+      this.index = newIndex;
+      this.updateName();
     },
+
+    updateName(){
+      const slide = this.slides[this.index];
+      this.$emit("input", slide.name);
+    },
+
     scroll() {
       const slides = this.$refs.slides;
       const { scrollWidth, children, scrollLeft } = slides;

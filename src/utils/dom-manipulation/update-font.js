@@ -15,7 +15,7 @@ export const updateFont = (fontName, fontLink, elmentId = 'upc-font') => {
 
 	const css = `
         @import url(${fontLink});
-       body{font-family: '${fontName}', sans-serif;}`;
+       .UpcPaymentPage{font-family: '${fontName}', sans-serif;}`;
 
 	style.appendChild(document.createTextNode(css));
 };

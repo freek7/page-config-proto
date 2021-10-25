@@ -36,11 +36,12 @@ const i18n = Vue.observable({
   }
 });
 
+
 export default {
   name: 'App',
   provide() {
     return {
-      i18n: i18n
+      i18n: i18n,
     }
   },
   components: {UpcPanelBar},
@@ -54,10 +55,12 @@ export default {
         "phone_number": "094 86 35 724",
         "email": "test@mail.com",
         "language": "ru",
-        "logo": "https://cdn.comfy.ua/skin/frontend/enterprise/comfy_3/modules/common/img/logo_main.svg"
+        "background": "#fff",
+        "logo": "https://cdn.comfy.ua/skin/frontend/enterprise/comfy_3/modules/common/img/logo_main.svg",
+        "background_color": "red",
       }
     }
-  }
+  },
 }
 </script>
 <style lang="scss">

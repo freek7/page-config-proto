@@ -20,6 +20,12 @@
         <image-preview @delete="ClearImage" :imgSrc="logo" />
       </li>
       <li class="upc-bar-list-item">
+        <p class="list-text">Цвет страницы</p>
+        <div>
+          <upc-color-picker v-model="value.background_color" />
+        </div>
+      </li>
+      <li class="upc-bar-list-item">
         <p class="list-text">Цвет хедера</p>
         <div>
           <upc-color-picker v-model="value.header_color" />
